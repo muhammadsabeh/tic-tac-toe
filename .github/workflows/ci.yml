@@ -1,0 +1,25 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      run: docker build -t tic-tac-toe .
+
+    - name: Run container test
+      run: |
+        docker run -d -p 5000:5000 --name test-container tic-tac-toe
+        sleep 5
+        curl http://localhost:5000

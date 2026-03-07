@@ -1,21 +1,8 @@
 version: "3.9"
 
 services:
-  tic-tac-toe:
+  tic-tac-toe-sabeeh:
     build: .
-    container_name: tictactoe_app
-    restart: always
     ports:
-      - "5000:5000"
-    environment:
-      - APP_ENV=production
-    volumes:
-      - game_data:/data
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-
-volumes:
-  game_data:
+      - "5002:5000"
+    restart: always
